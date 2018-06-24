@@ -75,9 +75,6 @@ class RegisterView(View):
                                            form.cleaned_data['password'])
             obj.save()
 
-            profile = ProfileModel.objects.create()
-            profile.user = obj
-
             user = authenticate(request, username=obj.username, password=obj.password)
 
             if user is not None:
