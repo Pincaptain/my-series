@@ -14,4 +14,4 @@ class SeriesView(View):
 
     # noinspection PyMethodMayBeStatic, PyUnusedLocal
     def post(self, request):
-        return HttpResponseRedirect(SeriesView)
+        return HttpResponseRedirect('/series')

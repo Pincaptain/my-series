@@ -1,0 +1,66 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block links %}
+
+    <link rel="stylesheet" href="{% static 'user/css/profile.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row user-infos cyruxx">
+                    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xs-offset-0 col-sm-offset-0 col-md-offset-1 col-lg-offset-1">
+                        <div class="panel panel-primary">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-5 col-lg-5">
+                                        {% if user.profiles.0.image_path %}
+                                            <img class="rounded-circle"
+                                             src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=100"
+                                             alt="User Pic">
+                                        {% else %}
+                                            <img class="rounded-circle"
+                                             src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=100"
+                                             alt="User Pic">
+                                        {% endif %}
+                                    </div>
+                                    <div class=" col-md-7 col-lg-7">
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Username:</td>
+                                                    <td>{{ user.username }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Email:</td>
+                                                    <td>{{ user.email }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Registered since:</td>
+                                                    {% if user.profiles.0.date_registered %}
+                                                        <td>{{ user.date_registered }}</td>
+                                                    {% else %}
+                                                        <td>Not specified</td>
+                                                    {% endif %}
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script href="{% static 'user/js/profile.js' %}"></script>
+{% endblock %}
