@@ -64,7 +64,6 @@
         <div class="row">
             <div class="row">
                 {% for current_series in added_series %}
-                    {% if current_series.profile.user == user %}
                         {% if not current_series.is_finished %}
                             <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
                                 <div class="card h-100">
@@ -100,7 +99,6 @@
                                     </div>
                                 </div>
                             </div>
-                        {% endif %}
                     {% endif %}
                 {% endfor %}
             </div>

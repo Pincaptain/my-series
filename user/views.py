@@ -91,15 +91,15 @@ class RegisterView(View):
 class ProfileView(View):
     template = os.path.join('user', 'profile.html')
 
-    addedSeries = AddedSeriesModel.objects.all()
     seasons = SeasonModel.objects.all()
     context = {
         'all_seasons': seasons,
-        'added_series': addedSeries
     }
 
     def get(self, request):
         if request.user.is_authenticated:
+            added_series = AddedSeriesModel.objects.filter(profile=ProfileModel.objects.get(user=request.user))
+            self.context['added_series'] = added_series
             return render(request, self.template, self.context)
 
         return HttpResponseRedirect('/user/login')

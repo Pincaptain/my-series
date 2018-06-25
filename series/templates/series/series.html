@@ -39,7 +39,11 @@
                             {% if user.is_authenticated %}
                                 <!-- Check if user already has the series on their list -->
 {#                                {% if  %}#}
+                                <form method="post" action="{% url 'add' %}">
+                                    {% csrf_token %}
+                                    <input hidden title="" name="id" value="{{ series.id }}">
                                     <button class="btn btn-success">Add to List</button>
+                                </form>
 {#                                {% endif %}#}
                             {% endif %}
 

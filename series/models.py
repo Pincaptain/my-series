@@ -27,9 +27,9 @@ class AddedSeriesModel(models.Model):
     date_started = models.DateTimeField(auto_now_add=True)
     date_finished = models.DateTimeField(null=True)
     is_finished = models.BooleanField(default=False)
-    current_season = models.IntegerField()
-    current_episode = models.IntegerField()
-    personal_rating = models.IntegerField()
+    current_season = models.IntegerField(default=1)
+    current_episode = models.IntegerField(default=1)
+    personal_rating = models.IntegerField(default=0)
 
     def __str__(self):
         return "Added Series: " + self.series.name
