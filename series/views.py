@@ -19,8 +19,6 @@ class SeriesView(View):
     }
 
     def get(self, request):
-        self.context['added_series'] = AddedSeriesModel.objects.filter(profile=
-                                                                       ProfileModel.objects.get(user=request.user))
         return render(request, self.template, self.context)
 
     # noinspection PyMethodMayBeStatic, PyUnusedLocal
