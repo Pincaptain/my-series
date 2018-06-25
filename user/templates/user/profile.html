@@ -57,6 +57,51 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="row">
+                {% for current_series in added_series %}
+                    {% if current_series.profile.user == user %}
+                        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+                            <div class="card h-100">
+                                <a href="#"><img class="card-img-top" src="{{ current_series.series.image_path }}" alt=""></a>
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <h4 class="series-title">{{ current_series.series.name }}</h4>
+                                    </h4>
+
+                                    <ul id="{{ current_series.series.pk }}seasons" class="seasons">
+                                        {% for seasons in all_seasons %}
+                                            {% if seasons.series == series %}
+                                                <li>Season: {{ seasons.order }} - episodes: {{ seasons.total_episodes }}</li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+
+                                    <p>Rating: {{ current_series.series.rating }}</p>
+                                    <p>Personal rating: {{ current_series.personal_rating}}</p>
+
+                                    {% for season in all_seasons %}
+                                        {% if current_series.series == season.series %}
+                                            {% if current_series.current_season == season.order %}
+                                                <p>Current season: {{ current_series.current_season }}</p>
+                                                <span>Current episode: {{ current_series.current_episode }}/{{ season.total_episodes }}</span>
+                                                <button>+</button>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    <p>Start date: {{ current_series.date_started }}</p>
+                                    <p class="card-text">{{ current_series.series.description }}</p>
+
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+
+        </div>
     </div>
 
 {% endblock %}

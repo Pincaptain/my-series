@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm, RegisterForm
 from django.contrib.auth.models import User
 from .models import ProfileModel
+from series.models import AddedSeriesModel, SeasonModel
 import os
 
 
@@ -89,7 +90,13 @@ class RegisterView(View):
 
 class ProfileView(View):
     template = os.path.join('user', 'profile.html')
-    context = {}
+
+    addedSeries = AddedSeriesModel.objects.all()
+    seasons = SeasonModel.objects.all()
+    context = {
+        'all_seasons': seasons,
+        'added_series': addedSeries
+    }
 
     def get(self, request):
         if request.user.is_authenticated:

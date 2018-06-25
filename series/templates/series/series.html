@@ -1,30 +1,52 @@
 {% extends 'base/base.html' %}
+{% load static %}
 
 {% block content %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <!-- Page Content -->
     <div class="container">
 
         <!-- Page Heading -->
-        <h1 class="my-4">Page Heading
-            <small>Secondary Text</small>
+        <h1 class="my-4">All
+            <small>TV Shows</small>
         </h1>
 
         <!-- Series -->
         <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-                <div class="card h-100">
-                    <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            <a href="#">Project One</a>
-                        </h4>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam
-                            aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt,
-                            dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
+            {% for series in all_series %}
+                <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+                    <div class="card h-100">
+                        <a href="#"><img class="card-img-top" src="{{ series.image_path }}" alt=""></a>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <h4 class="series-title" onclick="seasonsCollapse('{{ series.pk }}seasons')">{{ series.name }}</h4>
+                            </h4>
+
+                            <ul id="{{ series.pk }}seasons" class="seasons">
+                                {% for seasons in all_seasons %}
+                                    {% if seasons.series == series %}
+                                        <li>Season: {{ seasons.order }} - episodes: {{ seasons.total_episodes }}</li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+
+                            <p>Rating: {{ series.rating }}</p>
+                            <p class="card-text">{{ series.description }}</p>
+
+                            <!-- Check if user is logged in -->
+                            {% if user.is_authenticated %}
+                                <!-- Check if user already has the series on their list -->
+{#                                {% if  %}#}
+                                    <button class="btn btn-success">Add to List</button>
+{#                                {% endif %}#}
+                            {% endif %}
+
+                        </div>
                     </div>
                 </div>
-            </div>
+            {% endfor %}
         </div>
 
         <!-- Pagination -->
@@ -55,5 +77,11 @@
         </ul>
 
     </div>
+
+    <script>
+        function seasonsCollapse(id) {
+            $('#' + id).toggle('swing');
+        }
+    </script>
 
 {% endblock %}

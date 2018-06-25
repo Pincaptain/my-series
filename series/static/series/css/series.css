@@ -1,0 +1,15 @@
+.seasons {
+    display: none;
+    user-select: none;
+    list-style-type: none;
+    padding: 0;
+    transition: 0.5s;
+}
+.series-title{
+    color: #5b80b2;
+    user-select: none;
+}
+.series-title:hover {
+    cursor: pointer;
+    color: #003366;
+}

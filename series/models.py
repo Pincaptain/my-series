@@ -45,6 +45,7 @@ class SeasonModel(models.Model):
 
     series = models.ForeignKey(SeriesModel, on_delete=models.CASCADE, related_name='seasons')
     order = models.IntegerField()
+    total_episodes = models.IntegerField(default=0)
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -57,6 +58,7 @@ class SeasonModel(models.Model):
         ordering = ('-date_added',)
 
 
+# Redundant
 class EpisodeModel(models.Model):
 
     season = models.ForeignKey(SeasonModel, on_delete=models.CASCADE, related_name='episodes')
