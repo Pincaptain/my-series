@@ -114,40 +114,37 @@
         <hr />
 
         <div class="row">
-                <div class="row">
-                    {% for current_series in added_series %}
-                        {% if current_series.profile.user == user %}
-                            {% if current_series.is_finished %}
-                                <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-                                    <div class="card h-100">
-                                        <a href="#"><img class="card-img-top" src="{{ current_series.series.image_path }}" alt=""></a>
-                                        <div class="card-body">
-                                            <h4 class="card-title">
-                                                <h4 class="series-title">{{ current_series.series.name }}</h4>
-                                            </h4>
+            {% for current_series in added_series %}
+                {% if current_series.profile.user == user %}
+                    {% if current_series.is_finished %}
+                        <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+                            <div class="card h-100">
+                                <a href="#"><img class="card-img-top" src="{{ current_series.series.image_path }}" alt=""></a>
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <h4 class="series-title">{{ current_series.series.name }}</h4>
+                                    </h4>
 
-                                            <ul id="{{ current_series.series.pk }}seasons" class="seasons">
-                                                {% for seasons in all_seasons %}
-                                                    {% if seasons.series == series %}
-                                                        <li>Season: {{ seasons.order }} - episodes: {{ seasons.total_episodes }}</li>
-                                                    {% endif %}
-                                                {% endfor %}
-                                            </ul>
+                                    <ul id="{{ current_series.series.pk }}seasons" class="seasons">
+                                        {% for seasons in all_seasons %}
+                                            {% if seasons.series == series %}
+                                                <li>Season: {{ seasons.order }} - episodes: {{ seasons.total_episodes }}</li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
 
-                                            <p>Rating: {{ current_series.series.rating }}</p>
-                                            <p>Personal rating: {{ current_series.personal_rating}}</p>
-                                            <p>Start date: {{ current_series.date_started }}</p>
-                                            <p class="card-text">{{ current_series.series.description }}</p>
+                                    <p>Rating: {{ current_series.series.rating }}</p>
+                                    <p>Personal rating: {{ current_series.personal_rating}}</p>
+                                    <p>Start date: {{ current_series.date_started }}</p>
+                                    <p class="card-text">{{ current_series.series.description }}</p>
 
-                                        </div>
-                                    </div>
                                 </div>
-                            {% endif %}
-                        {% endif %}
-                    {% endfor %}
-                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
             </div>
-
         </div>
 
 {% endblock %}
