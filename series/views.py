@@ -19,6 +19,8 @@ class SeriesView(View):
     }
 
     def get(self, request):
+        self.context['added_series'] = AddedSeriesModel.objects.filter(profile=
+                                                                       ProfileModel.objects.get(user=request.user))
         return render(request, self.template, self.context)
 
     # noinspection PyMethodMayBeStatic, PyUnusedLocal
@@ -39,4 +41,31 @@ class AddSeries(View):
         added = AddedSeriesModel.objects.create(series=series, profile=profile)
         added.save()
 
+        return HttpResponseRedirect('/user')
+
+
+class ChangeSeries(View):
+
+    def get(self, request):
+        pass
+
+    # noinspection PyMethodMayBeStatic
+    def post(self, request):
+        series = AddedSeriesModel.objects.get(id=request.POST['added_series_id'])
+        series.current_season = request.POST['season_count']
+        series.current_episode = request.POST['episode_count']
+        series.save()
+        return HttpResponseRedirect('/user')
+
+
+class FinishSeries(View):
+
+    def get(self, request):
+        pass
+
+    # noinspection PyMethodMayBeStatic
+    def post(self, request):
+        series = AddedSeriesModel.objects.get(id=request.POST['added_series_id'])
+        series.is_finished = True
+        series.save()
         return HttpResponseRedirect('/user')
