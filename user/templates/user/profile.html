@@ -132,16 +132,6 @@
 
                                             <p>Rating: {{ current_series.series.rating }}</p>
                                             <p>Personal rating: {{ current_series.personal_rating}}</p>
-
-                                            {% for season in all_seasons %}
-                                                {% if current_series.series == season.series %}
-                                                    {% if current_series.current_season == season.order %}
-                                                        <p>Current season: {{ current_series.current_season }}</p>
-                                                        <span>Current episode: {{ current_series.current_episode }}/{{ season.total_episodes }}</span>
-                                                        <button>+</button>
-                                                    {% endif %}
-                                                {% endif %}
-                                            {% endfor %}
                                             <p>Start date: {{ current_series.date_started }}</p>
                                             <p class="card-text">{{ current_series.series.description }}</p>
 
